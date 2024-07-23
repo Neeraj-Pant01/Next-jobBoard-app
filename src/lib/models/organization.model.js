@@ -7,7 +7,7 @@ const orgSchema = new mongoose.Schema({
     },
     icon:{
         type:String,
-        required:true
+        required:false
     },
     orgName:{
         type:String,
@@ -16,6 +16,10 @@ const orgSchema = new mongoose.Schema({
     admin:{
         type:String
     },
+    desc:{
+        type:String,
+        required:true
+    },
     hasAccess:{
         type:[String]
     }
@@ -23,4 +27,4 @@ const orgSchema = new mongoose.Schema({
     timestamps:true
 })
 
-export const orgModel = mongoose.model('orgs',orgSchema)
+export const orgModel = mongoose.models.orgs || mongoose.model('orgs',orgSchema)

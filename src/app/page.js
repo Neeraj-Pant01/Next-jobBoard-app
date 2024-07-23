@@ -6,6 +6,7 @@ import {
   getSignUpUrl,
   getUser,
 } from '@workos-inc/authkit-nextjs';
+import { getAllJobsTogether } from '@/functions/apiRequest';
 
 const Home = async () => {
 
@@ -15,16 +16,21 @@ const Home = async () => {
 
     const signUpUrl = await getSignUpUrl();
 
+    let jobs = await getAllJobsTogether()
+
   return (
     <div className='md:px-4 px-2 my-5'>
       <Hero />
       <div className='flex flex-col bg-[lightgrey] md:py-4 py-2 px-2 md:px-6 md:max-w-6xl md:mx-auto rounded-md gap-3'>
         <b className='mb-4'>Recent Jobs</b>
+        {
+          jobs.map((j,i)=><Joblist key={i} j={j} />)
+        }
+        {/* <Joblist />
         <Joblist />
         <Joblist />
         <Joblist />
-        <Joblist />
-        <Joblist />
+        <Joblist /> */}
       </div>
     </div>
   )

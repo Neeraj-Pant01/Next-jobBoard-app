@@ -1,14 +1,12 @@
 import { jobModel } from "@/lib/models/job.model";
+import mongoose from "mongoose";
 
-export const POST = async (request, content) =>{
-    const jobData = await request.json();
-    try{
-       const newJob = new jobModel(jobData) 
-       const savedJob = await newJob.save();
-       return Response.json(savedJob)
-    }catch(err){
-        return Response.json(err)
-    }
+if(mongoose.connection.readyState === 0){
+    mongoose.connect(`${process.env.DBURI}`).then(()=>{
+        console.log("database is connected successfully !")
+    }).catch((err)=>{
+        console.log(err.message)
+    })
 }
 
 export const GET = async (request, content) =>{

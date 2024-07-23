@@ -1,9 +1,12 @@
+"use client"
+import Link from 'next/link'
 import React from 'react'
 import {AiFillHeart} from "react-icons/ai"
 
-const Joblist = () => {
+const Joblist = ({j}) => {
+  console.log(j)
   return (
-    <div className='flex items-center bg-[white] shadow-md py-2 rounded-lg px-4 gap-4'>
+    <Link href={`/job/${j?._id}`} className='flex items-center bg-[white] shadow-md py-2 rounded-lg px-4 cursor-pointer gap-4'>
       <div className='flex'>
         <img src='https://www.freepnglogos.com/uploads/spotify-logo-png/file-spotify-logo-png-4.png' className='size-12' />
       </div>
@@ -12,22 +15,22 @@ const Joblist = () => {
             <AiFillHeart className='text-[darkgrey] text-3xl cursor-pointer' />
         </div>
         <div className='flex text-sm text-[grey]'>
-            amazon
+            {j?.orgName}
         </div>
         <div className='flex text-lg font-bold'>
-            Project Manager
+           {j?.postName}
         </div>
         <div className="flex md:items-center md:justify-between w-[100%] text-sm text-[grey] flex-col md:flex-row">
             <div className='flex'>
-            Remote &bull;
-            Banglore
+            {j?.location} &bull;
+            {j?.place}
             </div>
             <div className='flex'>
-                1 minute ago
+              {new Date(j?.createdAt).toLocaleDateString()}
             </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 

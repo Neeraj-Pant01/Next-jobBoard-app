@@ -1,3 +1,4 @@
+import { jobModel } from "@/lib/models/job.model"
 import { orgModel } from "@/lib/models/organization.model"
 import mongoose from "mongoose"
 
@@ -13,13 +14,14 @@ export const GET = async (request, content) => {
     const { org } = content.params
     try {
         const organization = await orgModel.findById(org)
-        return Response.json(organization)
+        const jobs = await jobModel.find({orgId:org})
+        return Response.json({organization:organization, jobs:jobs})
     } catch (err) {
         return Response.json(err)
     }
 }
 
-export const put = async (request, content) => {
+export const PUT = async (request, content) => {
     const { org } = content.params
     const updatedData = await request.json()
     try {

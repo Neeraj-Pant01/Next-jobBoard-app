@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const jobSchema = new mongoose.Schema({
+    creatorId:{
+        type:String,
+        required : true
+    },
     orgId:{
         type:String,
         required:true
@@ -14,6 +18,7 @@ const jobSchema = new mongoose.Schema({
         required:true
     },
     location:{
+        type:String,
         enum: ["hybrid", "onsite", "remote"]
     },
     place:{
@@ -28,4 +33,4 @@ const jobSchema = new mongoose.Schema({
     timestamps:true
 })
 
-export const jobModel = mongoose.model('jobs', jobSchema)
+export const jobModel = mongoose.models.jobs || mongoose.model('jobs', jobSchema)
